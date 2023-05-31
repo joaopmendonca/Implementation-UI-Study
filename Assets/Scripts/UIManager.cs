@@ -15,7 +15,8 @@ public class UIManager : MonoBehaviour
     [Header("UI Elements")]
     public GameObject pressStartObj;
     public GameObject mainWindow;
-    public GameObject ConfigureWindow;
+    public GameObject configureWindow;
+    public GameObject loadingScreen;
 
     [Header("Main Menu Elements")]
     public Button[] mainMenuButtons;
@@ -140,6 +141,35 @@ public class UIManager : MonoBehaviour
         {
             button.interactable = false;
         } 
+    }
+
+    IEnumerator LoadingScreenFadeIn(float duration)
+    {
+        Image tempImage = loadingScreen.GetComponent<Image>();
+
+        Color originalColor = tempImage.color;
+        Color targetColor = new Color(originalColor.r, originalColor.g, originalColor.b, 1f); // Cor alvo com alpha máximo (completamente visível)
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration); // Interpolação entre 0 e 1 (progresso do efeito)
+
+            tempImage.color = Color.Lerp(originalColor, targetColor, t); // Interpolação da cor entre original e alvo
+
+            yield return null; // Aguarda um frame antes de continuar a próxima iteração do loop
+        }
+
+        tempImage.color = targetColor; // Define a cor final para garantir que seja exatamente a cor alvo (totalmente visível)
+    }
+
+    public void OpenLoadingScreen(float duration)
+    {
+        loadingScreen.SetActive(true);
+
+        StartCoroutine(LoadingScreenFadeIn(duration));
     }
 
     #endregion
