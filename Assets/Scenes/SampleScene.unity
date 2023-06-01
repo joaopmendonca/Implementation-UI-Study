@@ -1290,7 +1290,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 686038690}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -1336,7 +1336,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 393992727}
   m_OnClick:
     m_PersistentCalls:
@@ -3163,8 +3163,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2081476963}
   - {fileID: 393992725}
+  - {fileID: 2081476963}
   m_Father: {fileID: 1772798867}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7753,12 +7753,13 @@ MonoBehaviour:
   musicVolumeSlider: {fileID: 87548932}
   soundVolumeSlider: {fileID: 78901918}
   languageText: {fileID: 686038691}
-  previousLanguageButton: {fileID: 2081476964}
-  nextLanguageButton: {fileID: 393992726}
   saveButton: {fileID: 1974448499}
   cancelButton: {fileID: 2105048318}
+  previousButton: {fileID: 2081476964}
+  nextButton: {fileID: 393992726}
   defaultMusicVolume: 0.5
   defaultSoundVolume: 0.5
+  defaultLanguage: 1
 --- !u!114 &1760460188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9882,7 +9883,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 686038690}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -9928,7 +9929,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 2081476965}
   m_OnClick:
     m_PersistentCalls:
