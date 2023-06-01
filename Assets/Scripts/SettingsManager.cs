@@ -4,48 +4,43 @@ using TMPro;
 
 public class SettingsManager : MonoBehaviour
 {
-    #region Variables
-
     private const string MusicVolumeKey = "MusicVolume";
     private const string SoundVolumeKey = "SoundVolume";
+    private const string LanguageKey = "Language";
 
-    [Header("Sliders")]
     public Slider musicVolumeSlider;
     public Slider soundVolumeSlider;
-
-    [Header("Language")]
     public TextMeshProUGUI languageText;
+
+    public Button saveButton;
+    public Button cancelButton;
     public Button previousButton;
     public Button nextButton;
 
-    private int currentLanguageIndex = 0;
-    private string[] languages = { "Português do Brasil", "English", "Español" };
-    private string currentLanguage = "";
-
-    [Header("Buttons")]
-    public Button saveButton;
-    public Button cancelButton;
-
-    [Header("Default Values")]
     public float defaultMusicVolume = 0.5f;
     public float defaultSoundVolume = 0.5f;
+
+    public enum DefaultLanguage
+    {
+        Portuguese,
+        English,
+        Spanish
+    }
+
+    public DefaultLanguage defaultLanguage = DefaultLanguage.English;
 
     private float savedMusicVolume;
     private float savedSoundVolume;
 
-    #endregion
-
-    #region Unity Methods
+    private int currentLanguageIndex = 0;
+    private string[] languages = { "Português do Brasil", "English", "Español" };
+    private string currentLanguage = "";
 
     private void Start()
     {
         LoadSettings();
         InitializeUI();
     }
-
-    #endregion
-
-    #region Settings Methods
 
     private void LoadSettings()
     {
@@ -58,6 +53,27 @@ public class SettingsManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat(SoundVolumeKey, defaultSoundVolume);
         }
+
+        if (!PlayerPrefs.HasKey(LanguageKey))
+        {
+            SetDefaultLanguage();
+        }
+    }
+
+    private void SetDefaultLanguage()
+    {
+        switch (defaultLanguage)
+        {
+            case DefaultLanguage.Portuguese:
+                PlayerPrefs.SetString(LanguageKey, "Português do Brasil");
+                break;
+            case DefaultLanguage.English:
+                PlayerPrefs.SetString(LanguageKey, "English");
+                break;
+            case DefaultLanguage.Spanish:
+                PlayerPrefs.SetString(LanguageKey, "Español");
+                break;
+        }
     }
 
     private void InitializeUI()
@@ -68,19 +84,18 @@ public class SettingsManager : MonoBehaviour
         saveButton.onClick.AddListener(OnSaveButtonClick);
         cancelButton.onClick.AddListener(OnCancelButtonClick);
 
-        // Salva as preferências atuais para poder reverter caso o jogador cancele
         savedMusicVolume = musicVolumeSlider.value;
         savedSoundVolume = soundVolumeSlider.value;
 
         previousButton.onClick.AddListener(OnPreviousButtonClick);
         nextButton.onClick.AddListener(OnNextButtonClick);
 
+        currentLanguage = PlayerPrefs.GetString(LanguageKey);
         UpdateLanguageText();
     }
 
     private void UpdateLanguageText()
     {
-        currentLanguage = languages[currentLanguageIndex];
         languageText.text = currentLanguage;
     }
 
@@ -90,6 +105,7 @@ public class SettingsManager : MonoBehaviour
         if (currentLanguageIndex < 0)
             currentLanguageIndex = languages.Length - 1;
 
+        currentLanguage = languages[currentLanguageIndex];
         UpdateLanguageText();
     }
 
@@ -99,20 +115,18 @@ public class SettingsManager : MonoBehaviour
         if (currentLanguageIndex >= languages.Length)
             currentLanguageIndex = 0;
 
+        currentLanguage = languages[currentLanguageIndex];
         UpdateLanguageText();
     }
 
-    #endregion
-
-    #region Button Click Event Methods
-
-    public void OnSaveButtonClick()
+    private void OnSaveButtonClick()
     {
         PlayerPrefs.SetFloat(MusicVolumeKey, musicVolumeSlider.value);
         PlayerPrefs.SetFloat(SoundVolumeKey, soundVolumeSlider.value);
+        PlayerPrefs.SetString(LanguageKey, currentLanguage);
 
         PlayerPrefs.Save();
-        Debug.Log("Preferências salvas com sucesso!");
+        Debug.Log("Preferences saved successfully!");
     }
 
     private void OnCancelButtonClick()
@@ -120,6 +134,4 @@ public class SettingsManager : MonoBehaviour
         musicVolumeSlider.value = savedMusicVolume;
         soundVolumeSlider.value = savedSoundVolume;
     }
-
-    #endregion
 }
