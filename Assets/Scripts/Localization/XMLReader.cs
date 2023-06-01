@@ -25,12 +25,17 @@ public class XMLReader : MonoBehaviour
 
             // Procura o elemento com o identificador especificado
             XElement element = xmlDoc.Root.Descendants("row")
-                .FirstOrDefault(e => e.Element("id")?.Value == searchIdentifier);
+                .FirstOrDefault(e => e.Element("Identifier")?.Value == searchIdentifier);
+
+            /*O XElement é uma classe da biblioteca System.Xml.Linq que faz parte do namespace System.Xml. 
+            Essa classe é usada para representar um elemento XML em um documento XML.
+            O XElement fornece uma maneira conveniente de manipular e interagir com elementos XML.
+            Ele possui propriedades e métodos que permitem acessar e modificar os atributos, conteúdo e estrutura de um elemento XML.*/
 
             if (element != null)
             {
                 // Obtém o texto da segunda coluna
-                text = element.Element("text")?.Value;
+                text = element.Element("OriginalText")?.Value;
 
                 // Use o texto conforme necessário
                 Debug.Log("<color=yellow>" + text + "</color>");

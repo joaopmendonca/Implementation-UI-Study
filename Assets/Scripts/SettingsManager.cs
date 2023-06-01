@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -10,15 +9,18 @@ public class SettingsManager : MonoBehaviour
     private const string MusicVolumeKey = "MusicVolume";
     private const string SoundVolumeKey = "SoundVolume";
 
-
     [Header("Sliders")]
     public Slider musicVolumeSlider;
     public Slider soundVolumeSlider;
 
     [Header("Language")]
     public TextMeshProUGUI languageText;
-    public Button previousLanguageButton;
-    public Button nextLanguageButton;
+    public Button previousButton;
+    public Button nextButton;
+
+    private int currentLanguageIndex = 0;
+    private string[] languages = { "Português do Brasil", "English", "Español" };
+    private string currentLanguage = "";
 
     [Header("Buttons")]
     public Button saveButton;
@@ -55,31 +57,59 @@ public class SettingsManager : MonoBehaviour
         if (!PlayerPrefs.HasKey(SoundVolumeKey))
         {
             PlayerPrefs.SetFloat(SoundVolumeKey, defaultSoundVolume);
-        }            
+        }
     }
 
     private void InitializeUI()
     {
         musicVolumeSlider.value = PlayerPrefs.GetFloat(MusicVolumeKey, defaultMusicVolume);
-        soundVolumeSlider.value = PlayerPrefs.GetFloat(SoundVolumeKey, defaultSoundVolume);       
-        
+        soundVolumeSlider.value = PlayerPrefs.GetFloat(SoundVolumeKey, defaultSoundVolume);
+
         saveButton.onClick.AddListener(OnSaveButtonClick);
         cancelButton.onClick.AddListener(OnCancelButtonClick);
 
         // Salva as preferências atuais para poder reverter caso o jogador cancele
         savedMusicVolume = musicVolumeSlider.value;
         savedSoundVolume = soundVolumeSlider.value;
-        
-    }  
+
+        previousButton.onClick.AddListener(OnPreviousButtonClick);
+        nextButton.onClick.AddListener(OnNextButtonClick);
+
+        UpdateLanguageText();
+    }
+
+    private void UpdateLanguageText()
+    {
+        currentLanguage = languages[currentLanguageIndex];
+        languageText.text = currentLanguage;
+    }
+
+    private void OnPreviousButtonClick()
+    {
+        currentLanguageIndex--;
+        if (currentLanguageIndex < 0)
+            currentLanguageIndex = languages.Length - 1;
+
+        UpdateLanguageText();
+    }
+
+    private void OnNextButtonClick()
+    {
+        currentLanguageIndex++;
+        if (currentLanguageIndex >= languages.Length)
+            currentLanguageIndex = 0;
+
+        UpdateLanguageText();
+    }
 
     #endregion
 
-    #region Button Click Event Methods 
+    #region Button Click Event Methods
 
     public void OnSaveButtonClick()
     {
         PlayerPrefs.SetFloat(MusicVolumeKey, musicVolumeSlider.value);
-        PlayerPrefs.SetFloat(SoundVolumeKey, soundVolumeSlider.value);        
+        PlayerPrefs.SetFloat(SoundVolumeKey, soundVolumeSlider.value);
 
         PlayerPrefs.Save();
         Debug.Log("Preferências salvas com sucesso!");
@@ -89,10 +119,7 @@ public class SettingsManager : MonoBehaviour
     {
         musicVolumeSlider.value = savedMusicVolume;
         soundVolumeSlider.value = savedSoundVolume;
-    
     }
 
     #endregion
-
-   
 }
