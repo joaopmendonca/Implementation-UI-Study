@@ -2,140 +2,122 @@
 <root>
   <row>
     <Identifier>press_enter_to_start</Identifier>
-    <OriginalText>Pressione Enter para começar</OriginalText>
-    <TranslationEnglish>Press Enter to start</TranslationEnglish>
-    <TranslationSpanish>Presiona Enter para comenzar</TranslationSpanish>
+    <Portuguese>Pressione Enter para começar</Portuguese>
+    <English>Press Enter to start</English>
+    <Spanish>Presiona Enter para comenzar</Spanish>
   </row>
   <row>
     <Identifier>start</Identifier>
-    <OriginalText>Iniciar</OriginalText>
-    <TranslationEnglish>Start</TranslationEnglish>
-    <TranslationSpanish>Inicio</TranslationSpanish>
+    <Portuguese>Começar</Portuguese>
+    <English>Start</English>
+    <Spanish>Inicio</Spanish>
   </row>
   <row>
     <Identifier>options</Identifier>
-    <OriginalText>Opções</OriginalText>
-    <TranslationEnglish>Options</TranslationEnglish>
-    <TranslationSpanish>Opciones</TranslationSpanish>
+    <Portuguese>Opções</Portuguese>
+    <English>Options</English>
+    <Spanish>Opciones</Spanish>
   </row>
   <row>
     <Identifier>exit</Identifier>
-    <OriginalText>Sair</OriginalText>
-    <TranslationEnglish>Exit</TranslationEnglish>
-    <TranslationSpanish>Salir</TranslationSpanish>
+    <Portuguese>Sair</Portuguese>
+    <English>Exit</English>
+    <Spanish>Salir</Spanish>
   </row>
   <row>
     <Identifier>confirm_exit</Identifier>
-    <OriginalText>Tem Certeza que Quer Sair?</OriginalText>
-    <TranslationEnglish>Are you sure you want to exit?</TranslationEnglish>
-    <TranslationSpanish>¿Estás seguro de que quieres salir?</TranslationSpanish>
+    <Portuguese>Sair do Jogo?</Portuguese>
+    <English>Exit the Game?</English>
+    <Spanish>¿Salir del Juego?</Spanish>
   </row>
   <row>
     <Identifier>yes</Identifier>
-    <OriginalText>Sim</OriginalText>
-    <TranslationEnglish>Yes</TranslationEnglish>
-    <TranslationSpanish>Sí</TranslationSpanish>
+    <Portuguese>Sim</Portuguese>
+    <English>Yes</English>
+    <Spanish>Sí</Spanish>
   </row>
   <row>
     <Identifier>no</Identifier>
-    <OriginalText>Não</OriginalText>
-    <TranslationEnglish>No</TranslationEnglish>
-    <TranslationSpanish>No</TranslationSpanish>
+    <Portuguese>Não</Portuguese>
+    <English>No</English>
+    <Spanish>No</Spanish>
   </row>
   <row>
     <Identifier>new_load_game</Identifier>
-    <OriginalText>Novo / Carregar Jogo</OriginalText>
-    <TranslationEnglish>New / Load Game</TranslationEnglish>
-    <TranslationSpanish>Nuevo / Cargar Juego</TranslationSpanish>
+    <Portuguese>Novo / Carregar Jogo</Portuguese>
+    <English>New / Load Game</English>
+    <Spanish>Nuevo / Cargar Juego</Spanish>
   </row>
   <row>
-    <Identifier>load_game</Identifier>
-    <OriginalText>Carregar Jogo</OriginalText>
-    <TranslationEnglish>Load Game</TranslationEnglish>
-    <TranslationSpanish>Cargar Juego</TranslationSpanish>
+    <Identifier>load_game_menu</Identifier>
+    <Portuguese>Carregar Jogo</Portuguese>
+    <English>Load Game</English>
+    <Spanish>Cargar Juego</Spanish>
   </row>
   <row>
     <Identifier>new_game</Identifier>
-    <OriginalText>Novo Jogo</OriginalText>
-    <TranslationEnglish>New Game</TranslationEnglish>
-    <TranslationSpanish>Nuevo Juego</TranslationSpanish>
+    <Portuguese>Novo Jogo</Portuguese>
+    <English>New Game</English>
+    <Spanish>Nuevo Juego</Spanish>
   </row>
   <row>
-    <Identifier>options</Identifier>
-    <OriginalText>Opções</OriginalText>
-    <TranslationEnglish>Options</TranslationEnglish>
-    <TranslationSpanish>Opciones</TranslationSpanish>
+    <Identifier>options_menu</Identifier>
+    <Portuguese>Opções</Portuguese>
+    <English>Options</English>
+    <Spanish>Opciones</Spanish>
   </row>
   <row>
     <Identifier>music_volume</Identifier>
-    <OriginalText>Volume da Música</OriginalText>
-    <TranslationEnglish>Music Volume</TranslationEnglish>
-    <TranslationSpanish>Volumen de la Música</TranslationSpanish>
+    <Portuguese>Volume da Música</Portuguese>
+    <English>Music Volume</English>
+    <Spanish>Volumen de la Música</Spanish>
   </row>
   <row>
     <Identifier>sound_volume</Identifier>
-    <OriginalText>Volume do Som</OriginalText>
-    <TranslationEnglish>Sound Volume</TranslationEnglish>
-    <TranslationSpanish>Volumen del Sonido</TranslationSpanish>
+    <Portuguese>Volume do Som</Portuguese>
+    <English>Sound Volume</English>
+    <Spanish>Volumen del Sonido</Spanish>
   </row>
   <row>
     <Identifier>language</Identifier>
-    <OriginalText>Idioma</OriginalText>
-    <TranslationEnglish>Language</TranslationEnglish>
-    <TranslationSpanish>Idioma</TranslationSpanish>
+    <Portuguese>Idioma</Portuguese>
+    <English>Language</English>
+    <Spanish>Idioma</Spanish>
   </row>
   <row>
     <Identifier>portuguese_brazil</Identifier>
-    <OriginalText>Português do Brasil</OriginalText>
-    <TranslationEnglish>Portuguese (Brazil)</TranslationEnglish>
-    <TranslationSpanish>Portugués (Brasil)</TranslationSpanish>
+    <Portuguese>Português do Brasil</Portuguese>
+    <English>Portuguese (Brazil)</English>
+    <Spanish>Portugués (Brasil)</Spanish>
   </row>
   <row>
     <Identifier>confirm</Identifier>
-    <OriginalText>Confirmar</OriginalText>
-    <TranslationEnglish>Confirm</TranslationEnglish>
-    <TranslationSpanish>Confirmar</TranslationSpanish>
-  </row>
-  <row>
-    <Identifier>load_game</Identifier>
-    <OriginalText>Carregar Jogo</OriginalText>
-    <TranslationEnglish>Load Game</TranslationEnglish>
-    <TranslationSpanish>Cargar Juego</TranslationSpanish>
+    <Portuguese>Confirmar</Portuguese>
+    <English>Confirm</English>
+    <Spanish>Confirmar</Spanish>
   </row>
   <row>
     <Identifier>profile_name</Identifier>
-    <OriginalText>Nome do Perfil</OriginalText>
-    <TranslationEnglish>Profile Name</TranslationEnglish>
-    <TranslationSpanish>Nombre del Perfil</TranslationSpanish>
+    <Portuguese>Nome do Perfil</Portuguese>
+    <English>Profile Name</English>
+    <Spanish>Nombre del Perfil</Spanish>
   </row>
   <row>
     <Identifier>game_time</Identifier>
-    <OriginalText>Tempo de Jogo</OriginalText>
-    <TranslationEnglish>Game Time</TranslationEnglish>
-    <TranslationSpanish>Tiempo de Juego</TranslationSpanish>
+    <Portuguese>Tempo de Jogo</Portuguese>
+    <English>Game Time</English>
+    <Spanish>Tiempo de Juego</Spanish>
   </row>
   <row>
     <Identifier>load_profile</Identifier>
-    <OriginalText>Carregar Perfil</OriginalText>
-    <TranslationEnglish>Load Profile</TranslationEnglish>
-    <TranslationSpanish>Cargar Perfil</TranslationSpanish>
-  </row>
-  <row>
-    <Identifier>yes</Identifier>
-    <OriginalText>Sim</OriginalText>
-    <TranslationEnglish>Yes</TranslationEnglish>
-    <TranslationSpanish>Sí</TranslationSpanish>
-  </row>
-  <row>
-    <Identifier>no</Identifier>
-    <OriginalText>Não</OriginalText>
-    <TranslationEnglish>No</TranslationEnglish>
-    <TranslationSpanish>No</TranslationSpanish>
+    <Portuguese>Carregar Perfil</Portuguese>
+    <English>Load Profile</English>
+    <Spanish>Cargar Perfil</Spanish>
   </row>
   <row>
     <Identifier>loading</Identifier>
-    <OriginalText>Carregando</OriginalText>
-    <TranslationEnglish>Loading</TranslationEnglish>
-    <TranslationSpanish>Cargando</TranslationSpanish>
+    <Portuguese>Carregando</Portuguese>
+    <English>Loading</English>
+    <Spanish>Cargando</Spanish>
   </row>
 </root>

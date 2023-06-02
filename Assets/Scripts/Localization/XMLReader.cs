@@ -1,57 +1,41 @@
-using UnityEngine;
 using System.Xml;
-using System.Xml.Linq;
-using System.Linq;
+using UnityEngine;
 
 public class XMLReader : MonoBehaviour
 {
-    public string fileName = "nome_do_arquivo";
-    public string searchIdentifier = "hello_world";
+    public static XMLReader Instance;
 
-    string text = "";
-
-    void Start()
+    private void Awake()
     {
-        // Carrega o arquivo XML como um recurso
-        TextAsset xmlAsset = Resources.Load<TextAsset>("XML/" + fileName);
-
-        if (xmlAsset != null)
-        {
-            // Acesso ao conteúdo do arquivo XML
-            string conteudoXML = xmlAsset.text;
-
-            // Carrega o XML usando XDocument
-            XDocument xmlDoc = XDocument.Parse(conteudoXML);
-
-            // Procura o elemento com o identificador especificado
-            XElement element = xmlDoc.Root.Descendants("row")
-                .FirstOrDefault(e => e.Element("Identifier")?.Value == searchIdentifier);
-
-            /*O XElement é uma classe da biblioteca System.Xml.Linq que faz parte do namespace System.Xml. 
-            Essa classe é usada para representar um elemento XML em um documento XML.
-            O XElement fornece uma maneira conveniente de manipular e interagir com elementos XML.
-            Ele possui propriedades e métodos que permitem acessar e modificar os atributos, conteúdo e estrutura de um elemento XML.*/
-
-            if (element != null)
-            {
-                // Obtém o texto da segunda coluna
-                text = element.Element("OriginalText")?.Value;
-
-                // Use o texto conforme necessário
-                Debug.Log("<color=yellow>" + text + "</color>");
-            }
-            else
-            {
-                Debug.LogWarning("Identifier not found: " + searchIdentifier);
-            }
-
-            // Imprime uma mensagem em verde se o arquivo XML for encontrado
-            Debug.Log("<color=green>XML file found!</color>");
-        }
-        else
-        {
-            // Imprime uma mensagem de erro em vermelho se o arquivo XML não for encontrado
-            Debug.LogError("<color=red>XML file not found!</color>");
-        }
+      Instance = this;
     }
+
+    // Função para obter a tradução com base no arquivo XML e no identificador
+    public string GetTranslation(TextAsset xmlFile, string identifier, string columnName)
+    {
+        if (xmlFile != null)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlFile.text);
+
+            // Acesso aos elementos do XML
+            XmlNodeList nodes = xmlDoc.GetElementsByTagName("row");
+            foreach (XmlNode node in nodes)
+            {
+                // Obtém o identificador do nó atual
+                XmlNode identifierNode = node.SelectSingleNode("Identifier");
+                if (identifierNode != null && identifierNode.InnerText == identifier)
+                {
+                    // Obtém o conteúdo da coluna especificada
+                    XmlNode columnNode = node.SelectSingleNode(columnName);
+                    if (columnNode != null)
+                    {
+                        return columnNode.InnerText;
+                    }
+                }
+            }
+        }
+
+        return string.Empty; // Retorna uma string vazia se a tradução não for encontrada
+    }    
 }

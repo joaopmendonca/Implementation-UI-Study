@@ -1,137 +1,84 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+using System;
 
 public class SettingsManager : MonoBehaviour
 {
+    public static SettingsManager Instance;
+
+    public event Action<int> LanguageChanged;
+
     private const string MusicVolumeKey = "MusicVolume";
     private const string SoundVolumeKey = "SoundVolume";
     private const string LanguageKey = "Language";
 
     public Slider musicVolumeSlider;
     public Slider soundVolumeSlider;
-    public TextMeshProUGUI languageText;
+    public TMP_Dropdown languageDropdown;
+    public int languageIndex;
 
     public Button saveButton;
     public Button cancelButton;
-    public Button previousButton;
-    public Button nextButton;
 
-    public float defaultMusicVolume = 0.5f;
-    public float defaultSoundVolume = 0.5f;
+    public float defaultMusicVolume = 1f;
+    public float defaultSoundVolume = 1f;
 
-    public enum DefaultLanguage
+    private void Awake()
     {
-        Portuguese,
-        English,
-        Spanish
+        languageDropdown.onValueChanged.AddListener(OnLanguageDropdownValueChanged);
+        Instance = this;
     }
-
-    public DefaultLanguage defaultLanguage = DefaultLanguage.English;
-
-    private float savedMusicVolume;
-    private float savedSoundVolume;
-
-    private int currentLanguageIndex = 0;
-    private string[] languages = { "Português do Brasil", "English", "Español" };
-    private string currentLanguage = "";
 
     private void Start()
     {
         LoadSettings();
-        InitializeUI();
+    }
+
+    private void OnLanguageDropdownValueChanged(int index)
+    {
+        languageIndex = languageDropdown.value;
+        LanguageChanged?.Invoke(languageIndex);
     }
 
     private void LoadSettings()
     {
-        if (!PlayerPrefs.HasKey(MusicVolumeKey))
-        {
-            PlayerPrefs.SetFloat(MusicVolumeKey, defaultMusicVolume);
-        }
+        // Carregar as configurações salvas do PlayerPrefs
+        float savedMusicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, defaultMusicVolume);
+        float savedSoundVolume = PlayerPrefs.GetFloat(SoundVolumeKey, defaultSoundVolume);
+        int savedLanguageIndex = PlayerPrefs.GetInt(LanguageKey, 0);
 
-        if (!PlayerPrefs.HasKey(SoundVolumeKey))
-        {
-            PlayerPrefs.SetFloat(SoundVolumeKey, defaultSoundVolume);
-        }
-
-        if (!PlayerPrefs.HasKey(LanguageKey))
-        {
-            SetDefaultLanguage();
-        }
-    }
-
-    private void SetDefaultLanguage()
-    {
-        switch (defaultLanguage)
-        {
-            case DefaultLanguage.Portuguese:
-                PlayerPrefs.SetString(LanguageKey, "Português do Brasil");
-                break;
-            case DefaultLanguage.English:
-                PlayerPrefs.SetString(LanguageKey, "English");
-                break;
-            case DefaultLanguage.Spanish:
-                PlayerPrefs.SetString(LanguageKey, "Español");
-                break;
-        }
-    }
-
-    private void InitializeUI()
-    {
-        musicVolumeSlider.value = PlayerPrefs.GetFloat(MusicVolumeKey, defaultMusicVolume);
-        soundVolumeSlider.value = PlayerPrefs.GetFloat(SoundVolumeKey, defaultSoundVolume);
-
-        saveButton.onClick.AddListener(OnSaveButtonClick);
-        cancelButton.onClick.AddListener(OnCancelButtonClick);
-
-        savedMusicVolume = musicVolumeSlider.value;
-        savedSoundVolume = soundVolumeSlider.value;
-
-        previousButton.onClick.AddListener(OnPreviousButtonClick);
-        nextButton.onClick.AddListener(OnNextButtonClick);
-
-        currentLanguage = PlayerPrefs.GetString(LanguageKey);
-        UpdateLanguageText();
-    }
-
-    private void UpdateLanguageText()
-    {
-        languageText.text = currentLanguage;
-    }
-
-    private void OnPreviousButtonClick()
-    {
-        currentLanguageIndex--;
-        if (currentLanguageIndex < 0)
-            currentLanguageIndex = languages.Length - 1;
-
-        currentLanguage = languages[currentLanguageIndex];
-        UpdateLanguageText();
-    }
-
-    private void OnNextButtonClick()
-    {
-        currentLanguageIndex++;
-        if (currentLanguageIndex >= languages.Length)
-            currentLanguageIndex = 0;
-
-        currentLanguage = languages[currentLanguageIndex];
-        UpdateLanguageText();
-    }
-
-    private void OnSaveButtonClick()
-    {
-        PlayerPrefs.SetFloat(MusicVolumeKey, musicVolumeSlider.value);
-        PlayerPrefs.SetFloat(SoundVolumeKey, soundVolumeSlider.value);
-        PlayerPrefs.SetString(LanguageKey, currentLanguage);
-
-        PlayerPrefs.Save();
-        Debug.Log("Preferences saved successfully!");
-    }
-
-    private void OnCancelButtonClick()
-    {
+        // Definir os valores carregados nos controles deslizantes de volume e no dropdown de idioma
         musicVolumeSlider.value = savedMusicVolume;
         soundVolumeSlider.value = savedSoundVolume;
+        languageDropdown.value = savedLanguageIndex;
+
+        // Atualizar a variável languageIndex com o valor atual do dropdown de idioma
+        languageIndex = languageDropdown.value;
+
+        Debug.Log("Configurações carregadas!");
+    }
+
+    public void SaveSettings()
+    {
+        // Salvar as configurações atuais nos PlayerPrefs
+        float musicVolume = musicVolumeSlider.value;
+        float soundVolume = soundVolumeSlider.value;
+
+        PlayerPrefs.SetFloat(MusicVolumeKey, musicVolume);
+        PlayerPrefs.SetFloat(SoundVolumeKey, soundVolume);
+        PlayerPrefs.SetInt(LanguageKey, languageIndex);
+        PlayerPrefs.Save();
+
+        Debug.Log("Configurações salvas!");
+    }
+
+    public void CancelSettings()
+    {
+        // Carregar as configurações novamente para reverter as alterações feitas pelo jogador
+        LoadSettings();
+
+        Debug.Log("Configurações canceladas!");
     }
 }
